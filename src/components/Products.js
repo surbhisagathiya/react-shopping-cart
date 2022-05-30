@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import formatCurrency from "../utils";
 import Fade from "react-reveal/Fade";
-import Modal from "react-modal/lib/components/Modal";
-import { Zoom } from "react-reveal";
-import { fetchProducts } from "../actions/productActions";
+import Modal from "react-modal";
+import Zoom from "react-reveal/Zoom";
 import { connect } from "react-redux";
+import { fetchProducts } from "../actions/productActions";
 
 class Products extends Component {
   constructor(props) {
@@ -24,7 +24,6 @@ class Products extends Component {
   };
   render() {
     const { product } = this.state;
-    console.log(this.props.products);
     return (
       <div>
         <Fade bottom cascade>
@@ -100,6 +99,9 @@ class Products extends Component {
     );
   }
 }
-export default connect((state) => ({ products: state.products.items }), {
-  fetchProducts,
-})(Products);
+export default connect(
+  (state) => ({ products: state.products.filteredItems }),
+  {
+    fetchProducts,
+  }
+)(Products);
